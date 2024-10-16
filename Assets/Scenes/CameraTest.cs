@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Studiouvu.Runtime;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CameraTest : MonoBehaviour
@@ -55,6 +51,11 @@ public class CameraTest : MonoBehaviour
     public void ShakeSmall()
     {
         _inGameCamera.Shake(0.5f);
+    }
+    
+    public void SetEffectActive()
+    {
+        _inGameCamera.applyEffect = !_inGameCamera.applyEffect;
     }
 
     public void Shot()

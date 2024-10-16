@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace Studiouvu.Runtime
 {
     public class InGameCamera : MonoBehaviour, IIngameCameraService
@@ -23,7 +24,8 @@ namespace Studiouvu.Runtime
 
         [SerializeField] private Transform _resultPoint;
         [SerializeField] private Transform _targetPoint;
-        // [SerializeField] private Transform _shakenPoint;
+
+        public bool applyEffect = true;
 
         private readonly Dictionary<Transform, float> _targetSet = new();
         private Vector3 _targetPosition;
@@ -50,6 +52,12 @@ namespace Studiouvu.Runtime
             if (_targetSet.Count == 0)
                 return;
 
+            if (!applyEffect)
+            {
+                transform.position = _targetSet.First().Key.position.Copy(z: transform.position.z);
+                return;
+            }
+
             var position = Vector3.zero;
 
             foreach (var t in _targetSet)
@@ -65,12 +73,12 @@ namespace Studiouvu.Runtime
 
             _targetPosition = centerPosition;
 
-            _targetPoint.position = transform.position.Copy(z: 0);
+            _targetPoint.position = _targetPosition.Copy(z: 0);
 
             _cameraPosition = Vector2.Lerp(_cameraPosition, centerPosition, _speed);
 
             _trembleTime += Time.deltaTime;
-            
+
             var shakeTime = Time.time * _shakeSpeed;
             var shakeTremble = Mathf.Sin(_trembleTime * _shakeTremble);
             var shakePos = new Vector3(Mathf.Sin(shakeTime), Mathf.Cos(shakeTime)) * ((0.2f + shakeTremble) * _shakePower);
@@ -114,7 +122,7 @@ namespace Studiouvu.Runtime
 
             if (zoom > _zoom)
                 _zoom = zoom;
-            
+
             if (power <= 0.01f)
                 _trembleTime = 0;
         }
