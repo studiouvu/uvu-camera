@@ -33,6 +33,7 @@ namespace Studiouvu.Runtime
         private float _zoom;
         private Vector3 _outFocusVector;
         private float _outFocusTime;
+        private float _trembleTime;
 
         private float _defaultOrthographicSize;
 
@@ -68,9 +69,11 @@ namespace Studiouvu.Runtime
 
             _cameraPosition = Vector2.Lerp(_cameraPosition, centerPosition, _speed);
 
+            _trembleTime += Time.deltaTime;
+            
             var shakeTime = Time.time * _shakeSpeed;
-            var shakeMul = Mathf.Sin(Time.time * _shakeTremble);
-            var shakePos = new Vector3(Mathf.Sin(shakeTime), Mathf.Cos(shakeTime)) * ((0.2f + shakeMul) * _shakePower);
+            var shakeTremble = Mathf.Sin(_trembleTime * _shakeTremble);
+            var shakePos = new Vector3(Mathf.Sin(shakeTime), Mathf.Cos(shakeTime)) * ((0.2f + shakeTremble) * _shakePower);
 
             var shakenPosition = _cameraPosition + shakePos;
 
@@ -111,6 +114,9 @@ namespace Studiouvu.Runtime
 
             if (zoom > _zoom)
                 _zoom = zoom;
+            
+            if (power <= 0.01f)
+                _trembleTime = 0;
         }
 
         public void OutFocus(Vector3 vector)
