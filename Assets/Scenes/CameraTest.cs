@@ -24,6 +24,11 @@ public class CameraTest : MonoBehaviour
         _inGameCamera.AddCameraTarget(transform, 2);
     }
 
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     public void TestAddTarget()
     {
         var position = Random.insideUnitCircle * _targetCreateDistance;
@@ -62,7 +67,7 @@ public class CameraTest : MonoBehaviour
         var projectile = Instantiate(_projectilePrefab, transform.position, quaternion.identity);
         projectile.SetDirection(direction);
 
-        _inGameCamera.OutFocus(direction * _outFocusDistance);
+        _inGameCamera.OutFocus(-direction * _outFocusDistance);
     }
 
     private void Update()

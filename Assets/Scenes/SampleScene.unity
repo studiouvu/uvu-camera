@@ -990,9 +990,9 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   _speed: 0.06
   _shakeSpeed: 5
-  _shakeTremble: 45
+  _shakeTremble: 35
   _shakeDisappearSpeed: 0.12
-  _outFocusDisappearSpeed: 0.3
+  _outFocusDisappearSpeed: 0.25
   _resultPoint: {fileID: 1172045869835209404}
   _targetPoint: {fileID: 695083556}
 --- !u!1 &650195213

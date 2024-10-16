@@ -44,7 +44,7 @@ namespace Studiouvu.Runtime
             _camera.orthographicSize = _defaultOrthographicSize;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (_targetSet.Count == 0)
                 return;
