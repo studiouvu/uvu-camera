@@ -989,7 +989,7 @@ MonoBehaviour:
   _roomSize: {x: 36, y: 21}
   _offset: {x: 0, y: 0}
   _speed: 0.06
-  _shakeSpeed: 5
+  _shakeSpeed: 3
   _shakeTremble: 35
   _shakeDisappearSpeed: 0.12
   _outFocusDisappearSpeed: 0.25
