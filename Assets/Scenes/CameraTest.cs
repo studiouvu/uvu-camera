@@ -21,7 +21,7 @@ public class CameraTest : MonoBehaviour
 
     private void OnEnable()
     {
-        _inGameCamera.AddCameraTarget(transform, 2);
+        _inGameCamera.AddCameraTarget(transform, 1);
     }
 
     private void Start()
@@ -33,7 +33,6 @@ public class CameraTest : MonoBehaviour
     {
         var position = Random.insideUnitCircle * _targetCreateDistance;
         var target = Instantiate(_targetTestPrefab, position, Quaternion.identity);
-        target.onDamaged += ShakeSmall;
         target.onDestroy += Shake;
         target.onDestroy += () => _inGameCamera.RemoveCameraTarget(target.transform);
         _inGameCamera.AddCameraTarget(target.transform, 1);
@@ -43,7 +42,6 @@ public class CameraTest : MonoBehaviour
     {
         var position = Random.insideUnitCircle * _targetCreateDistance;
         var target = Instantiate(_targetTestBigPrefab, position, Quaternion.identity);
-        target.onDamaged += ShakeSmall;
         target.onDestroy += Shake;
         target.onDestroy += () => _inGameCamera.RemoveCameraTarget(target.transform);
         _inGameCamera.AddCameraTarget(target.transform, 3);
